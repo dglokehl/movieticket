@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+
+@theme {
+    --color-bg: #1B1E25;
+
+    --color-white: #FFFFFF;
+    --color-lightgrey: #AFAFAF;
+    --color-darkgrey: #696D74;
+}
+
+
+@layer components {
+    .hover-75 {
+        @apply cursor-pointer select-none duration-75 sm:hover:opacity-75
+    }
+}
+
+
+:root {
+    background-color: var(--color-bg);
+    color: var(--color-white);
+}
