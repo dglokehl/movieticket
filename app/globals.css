@@ -5,12 +5,34 @@
     --color-bg: #1B1E25;
 
     --color-white: #FFFFFF;
-    --color-lightgrey: #AFAFAF;
-    --color-darkgrey: #696D74;
+    --color-grey-light: #AFAFAF;
+    --color-grey-medium: #BABFC9;
+    --color-grey-dark: #696D74;
 }
 
 
 @layer components {
+    .heading-1 {
+        @apply text-xl font-semibold
+    }
+    .heading-2 {
+        @apply text-base font-semibold
+    }
+
+    .subheading-1 {
+        @apply text-sm font-light text-grey-medium
+    }
+    .subheading-2 {
+        @apply text-xs font-light text-grey-medium
+    }
+
+    .body-1 {
+        @apply text-sm font-light text-grey-medium
+    }
+    .body-2 {
+        @apply text-xs font-light text-grey-medium
+    }
+
     .hover-75 {
         @apply cursor-pointer select-none duration-75 sm:hover:opacity-75
     }
