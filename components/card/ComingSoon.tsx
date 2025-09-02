@@ -19,9 +19,9 @@ export default function ComingSoon({ className, movie, ...rest}: ComingSoonProps
                     {movie.title}
                 </h2>
 
-                <h3 className="text-sm text-grey-light">
+                <p className="text-sm text-grey-light">
                     {movie.release_date}
-                </h3>
+                </p>
             </article>
         </Link>
     )

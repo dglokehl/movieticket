@@ -1,5 +1,5 @@
 
-import { getMovies } from "./api/actions"
+import { getMovies } from "@/app/api/actions"
 
 import PageWrapper from "@/components/PageWrapper"
 import Search from "@/components/Search"
@@ -12,7 +12,11 @@ export default async function HomePage() {
     console.log(upcomingMovies)
 
     return (
-        <PageWrapper footer className="flex flex-col gap-7.5">
+        <PageWrapper
+            className="flex flex-col gap-7.5"
+            footer
+            header={{ title: "Home" }}
+        >
             <Search />
 
             <Section obj={{ heading: "Coming Soon", gap: "gap-4.5" }}>

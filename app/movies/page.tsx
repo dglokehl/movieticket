@@ -1,12 +1,13 @@
 
 import { getMovies } from "@/app/api/actions"
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 import PageWrapper from "@/components/PageWrapper"
 import Section from "@/components/Section"
 import MovieCard from "@/components/card/MovieCard"
 
 export const metadata = {
-    title: 'Explore Movies',
+    title: "Explore Movies",
 }
 
 
@@ -19,7 +20,11 @@ export default async function MoviesPage() {
 
 
     return (
-        <PageWrapper footer className="flex flex-col gap-7.5">
+        <PageWrapper
+            className="flex flex-col gap-7.5"
+            footer
+            header={{ title: metadata.title, button: <FaMagnifyingGlass /> }}
+        >
             <Section obj={{ heading: "Coming Soon", button: "See more" }}>
                 {topMovies.results.map((movie: any, i: number) => <MovieCard movie={movie} key={movie.id} size="lg" />)}
             </Section>

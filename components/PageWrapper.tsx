@@ -1,15 +1,19 @@
+import Header from "./Header";
 import Footer from "./Footer"
 
 type PageWrapperProps = {
     children?: React.ReactNode
     className?: string;
     footer?: boolean;
+    header: any;
 }
 
-export default function PageWrapper({ children, className, footer, ...rest}: PageWrapperProps) {
+export default function PageWrapper({ children, className, footer, header, ...rest}: PageWrapperProps) {
     return (
         <>
-            <main className={`p-7.5 ${className ? className : ""}`} {...rest}>
+            <Header obj={header} />
+
+            <main className={`px-default pt-header ${footer ? "pb-20" : "pb-default"} ${className ? className : ""}`} {...rest}>
                 {children}
             </main>
 

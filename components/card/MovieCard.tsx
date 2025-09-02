@@ -1,11 +1,16 @@
 import Link from "next/link"
 
+import { formatStars } from "@/utils/helpers"
+
+import StarRating from "../StarRating";
+
 type MovieCardProps = {
     children?: React.ReactNode
     className?: string;
     movie: any;
     size?: string;
 }
+
 
 export default function MovieCard({ children, className, movie, size, ...rest}: MovieCardProps) {
     return (
@@ -22,7 +27,7 @@ export default function MovieCard({ children, className, movie, size, ...rest}: 
                 </h2>
 
                 <h3 className="mt-0.5 text-sm text-grey-light">
-                    {size === "lg" ? movie.vote_average : movie.genre_ids[0]}
+                    {size === "lg" ? <StarRating rating={formatStars(movie.vote_average)} /> : movie.genre_ids[0]}
                 </h3>
             </article>
         </Link>

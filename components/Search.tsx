@@ -22,7 +22,7 @@ export default function Search({ children, className, ...rest}: SearchProps) {
 
     return (
         <Form
-            action=""
+            action="/movies"
             onSubmit={handleSubmit}
             className={`w-full flex items-center relative ${className ? className : ""}`}
             {...rest}

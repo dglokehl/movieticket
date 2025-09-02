@@ -2,12 +2,20 @@
 
 
 @theme {
+    --spacing-default: 1.875rem;
+
+    --spacing-header: 5.625rem;
+    --height-header: 5.625rem;
+
     --color-bg: #1B1E25;
 
     --color-white: #FFFFFF;
     --color-grey-light: #AFAFAF;
     --color-grey-medium: #BABFC9;
     --color-grey-dark: #696D74;
+
+    --color-blue: #54A8E5;
+    --color-yellow: #FFA235;
 }
 
 
