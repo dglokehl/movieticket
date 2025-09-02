@@ -10,7 +10,7 @@ export default function ComingSoon({ className, movie, ...rest}: ComingSoonProps
         <Link href={`/movies/${movie.id}`}>
             <article className={`flex flex-col gap-1 ${className ? className : ""}`} {...rest}>
                 <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+                    src={movie.backdrop_path ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}` : "/placeholder.svg"}
                     alt=""
                     className="min-w-72 w-full h-45 object-cover rounded-xl"
                 />

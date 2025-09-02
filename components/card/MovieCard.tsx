@@ -17,7 +17,7 @@ export default function MovieCard({ children, className, movie, size, ...rest}: 
         <Link href={`/movies/${movie.id}`}>
             <article className={`${className ? className : ""}`} {...rest}>
                 <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "/placeholder.svg"}
                     alt=""
                     className={`${size === "lg" ? "min-w-46 w-full h-62" : "min-w-30 w-full h-46"} object-cover rounded-xl`}
                 />

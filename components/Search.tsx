@@ -27,7 +27,7 @@ export default function Search({ children, className, ...rest}: SearchProps) {
             className={`w-full flex items-center relative ${className ? className : ""}`}
             {...rest}
         >
-            <LuSearch className="size-6 absolute left-8 text-grey-dark" />
+            <LuSearch className="size-6 absolute left-8 text-grey-dark pointer-events-none" />
 
             <input
                 type="search"

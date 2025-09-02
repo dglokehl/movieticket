@@ -25,7 +25,7 @@ export default async function MoviesPage() {
             footer
             header={{ title: metadata.title, button: <FaMagnifyingGlass /> }}
         >
-            <Section obj={{ heading: "Coming Soon", button: "See more" }}>
+            <Section obj={{ heading: "Top Movies", button: "See more" }}>
                 {topMovies.results.map((movie: any, i: number) => <MovieCard movie={movie} key={movie.id} size="lg" />)}
             </Section>
 
