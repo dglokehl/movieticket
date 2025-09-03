@@ -1,17 +1,17 @@
 import Link from "next/link"
 
 import SettingsCard from "@/components/card/SettingsCard"
+import LogoutButton from "./LogoutButton"
 import { settingsDataProps } from "@/data/settingsData"
 
 type SettingsSectionProps = {
-    children?: React.ReactNode
     className?: string;
     data: settingsDataProps[];
     heading: string;
 }
 
 
-export default function SettingsSection({ children, className, data, heading, ...rest}: SettingsSectionProps) {
+export default function SettingsSection({ className, data, heading, ...rest}: SettingsSectionProps) {
     return (
         <section className={`${className ? className : ""}`} {...rest}>
             <h2 className="mb-3 heading-1">
@@ -25,6 +25,10 @@ export default function SettingsSection({ children, className, data, heading, ..
                             <Link href={obj.href}>
                                 <SettingsCard obj={obj} />
                             </Link>
+                        ) : obj.text === "Logout" ? (
+                            <LogoutButton>
+                                <SettingsCard obj={obj} />
+                            </LogoutButton>
                         ) : (
                             <SettingsCard obj={obj} />
                         )}

@@ -5,7 +5,8 @@ type SettingsCardProps = {
     className?: string;
     obj: {
         color?: string;
-        icon: React.ReactNode;
+        icon?: React.ReactNode;
+        img?: string;
         text: string;
         subtext?: string;
         href?: string;
@@ -16,8 +17,8 @@ export default function SettingsCard({ children, className, obj, ...rest}: Setti
     return (
         <div className={`flex justify-between items-center cursor-pointer ${className ? className : ""}`} {...rest}>
             <div className="flex items-center gap-3.5">
-                <figure className={`size-12 grid place-items-center rounded-xl overflow-hidden *:size-6 ${obj.color ? obj.color : "bg-[#4E5462]"}`}>
-                    {obj.icon}
+                <figure className={`size-12 grid place-items-center rounded-xl overflow-hidden ${obj.icon ? "*:size-6" : ""} ${obj.color ? obj.color : "bg-[#4E5462]"}`}>
+                    {obj.icon ? obj.icon : obj.img ? <img src={obj.img} alt="" className="size-full object-cover" /> : ""}
                 </figure>
 
                 <div className="font-medium">
