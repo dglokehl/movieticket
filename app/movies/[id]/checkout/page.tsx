@@ -1,25 +1,25 @@
+import { Metadata } from "next";
+
+import { getMovies } from "@/app/api/actions";
+
 import PageWrapper from "@/components/PageWrapper"
-import Button from "@/components/Button";
+import CheckoutForm from "./components/CheckoutForm";
 
-
-export const metadata = {
+export const metadata: Metadata = {
     title: "Checkout",
 }
 
 
-export default async function BookingPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function CheckoutPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
+    const movie = await getMovies(`https://api.themoviedb.org/3/movie/${id}`)
 
     return (
         <PageWrapper
             className=""
             header={{ title: metadata.title }}
         >
-            <Button href={`/movies/${id}/checkout`} className="mt-7 flex justify-evenly items-center">
-                <p className="px-6">Pay Now</p>
-                <p>|</p>
-                <p>$99.9</p>
-            </Button>
+            <CheckoutForm movie={id} movie_title={movie.title} />
         </PageWrapper>
     )
 }

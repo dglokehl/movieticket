@@ -1,13 +1,13 @@
-import Link from "next/link"
+import { Metadata } from "next";
+import { FaRegBookmark, FaStar } from "react-icons/fa6";
+
+import { getMovies } from "@/app/api/actions"
+import { formatRating, formatRuntime } from "@/utils/helpers";
 
 import PageWrapper from "@/components/PageWrapper"
 import Button from "@/components/Button";
 
-import { FaRegBookmark, FaStar } from "react-icons/fa6";
-import { getMovies } from "@/app/api/actions"
-import { formatRating, formatRuntime } from "@/utils/helpers";
-
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
     const { id } = await params;
     const data = await getMovies(`https://api.themoviedb.org/3/movie/${id}`)
 
@@ -69,7 +69,7 @@ export default async function MovieDetailsPage({ params }: { params: Promise<{ i
                 </p>
             </section>
 
-            <Button href={`/movies/${id}/booking`} className="mt-7">
+            <Button href={`${id}/booking`} className="mt-7">
                 Book Ticket
             </Button>
         </PageWrapper>

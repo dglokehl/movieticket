@@ -19,7 +19,7 @@ const footerData = [
         icon: <LuCompass />,
     },
     {
-        href: "/saved",
+        href: "/tickets",
         icon: <LuBookmark />,
     },
     {

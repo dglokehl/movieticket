@@ -1,10 +1,11 @@
+import { Metadata } from "next"
 import Link from "next/link"
 
 import PageWrapper from "@/components/PageWrapper"
-import AuthForm from "../_components/AuthForm"
+import AuthForm from "../components/AuthForm"
 import FormField from "@/components/FormField"
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Login",
 }
 

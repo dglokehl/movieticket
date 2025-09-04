@@ -1,4 +1,3 @@
-
 import { getMovies } from "@/app/api/actions"
 
 import PageWrapper from "@/components/PageWrapper"

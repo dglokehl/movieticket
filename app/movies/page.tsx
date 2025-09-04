@@ -1,12 +1,13 @@
+import { Metadata } from "next";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 import { getMovies } from "@/app/api/actions"
-import { FaMagnifyingGlass } from "react-icons/fa6";
 
 import PageWrapper from "@/components/PageWrapper"
 import Section from "@/components/Section"
 import MovieCard from "@/components/card/MovieCard"
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Explore Movies",
 }
 

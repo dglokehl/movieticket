@@ -1,14 +1,15 @@
+import { Metadata } from "next"
 import Link from "next/link"
+
+import { accountData, privacyData } from "@/data/settingsData"
+import { supaUser, supaProfile } from "@/app/api/actions"
 
 import PageWrapper from "@/components/PageWrapper"
 import SettingsSection from "@/components/SettingsSection"
 import SettingsCard from "@/components/card/SettingsCard"
 import Button from "@/components/Button"
 
-import { accountData, privacyData } from "@/data/settingsData"
-import { supaUser, supaProfile } from "@/app/api/actions"
-
-export const metadata = {
+export const metadata: Metadata = {
     title: "Settings",
 }
 
