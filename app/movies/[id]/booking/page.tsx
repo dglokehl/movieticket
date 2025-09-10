@@ -3,9 +3,7 @@ import { Metadata } from "next";
 import { createClient } from "@/utils/supabase/server";
 
 import PageWrapper from "@/components/PageWrapper"
-import Button from "@/components/Button";
 import SeatLayout from "./components/SeatLayout";
-import BookingSelect from "./components/BookingSelect";
 import BookingLayout from "./components/BookingLayout";
 
 export const metadata: Metadata = {
@@ -23,6 +21,23 @@ export default async function BookingPage({ params }: { params: Promise<{ id: st
         .order("id", { ascending: true })
     console.log(data)
 
+
+    const reservedSeats = Array.from({ length: 5 }).map((_, rowIndex) => {
+        const row = String.fromCharCode(65 + rowIndex)
+        const seat = `${row}${Math.floor(Math.random() * 8) + 1}`
+        return seat
+    })
+    // const reservedSeats: string[] = []
+    // for (let rowIndex = 0; rowIndex < 5; rowIndex++) {
+    //     for (let seatIndex = 1; seatIndex <= 8; seatIndex++) {
+    //         if (Math.random() < 0.2) {
+    //             reservedSeats.push(`${String.fromCharCode(65 + rowIndex)}${seatIndex}`)
+    //         }
+    //     }
+    // }
+
+    console.log(reservedSeats)
+
     return (
         <PageWrapper
             className=""
@@ -30,7 +45,7 @@ export default async function BookingPage({ params }: { params: Promise<{ id: st
         >
             <BookingLayout data={data} />
 
-            <SeatLayout className="mt-10" />
+            <SeatLayout className="mt-10" reservedSeats={reservedSeats} />
         </PageWrapper>
     )
 }

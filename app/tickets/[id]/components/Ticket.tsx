@@ -7,13 +7,13 @@ type TicketProps = {
 
 export default function Ticket({ className, ticket, ...rest}: TicketProps) {
     return (
-        <article className={`py-7 space-y-12 text-sm font-semibold text-black bg-white rounded-2xl select-none pointer-events-none ${className ? className : ""}`} {...rest}>
-            <div className="px-7 space-y-8 *:grid *:grid-cols-5 *:gap-3 *:*:first:col-span-3 *:*:last:col-span-2 *:*:*:first:!text-grey-dark *:*:*:line-clamp-1">
+        <article className={`py-7 space-y-12 text-sm font-semibold text-black bg-white rounded-2xl select-none pointer-events-none relative ${className ? className : ""}`} {...rest}>
+            <div className="px-7 space-y-8 *:grid *:grid-cols-2 *:gap-3 *:*:*:first:!text-grey-dark *:*:*:first:mb-1">
                 <div>
-                    <h3 className="!text-base">
-                        Film: {ticket.movie_title}
+                    <h3 className="!text-base col-span-2">
+                        {ticket.movie_title}
                     </h3>
-                    <p className="!text-base !text-[#F14763]">
+                    <p className="!text-xs !text-[#F14763] absolute top-2 right-4">
                         E-Ticket
                     </p>
                 </div>
@@ -25,7 +25,7 @@ export default function Ticket({ className, ticket, ...rest}: TicketProps) {
                     </div>
                     <div>
                         <p>Seats</p>
-                        <p>{ticket.amount}</p>
+                        <p>{ticket.seats.join(", ")}</p>
                     </div>
                 </div>
 

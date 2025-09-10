@@ -8,34 +8,50 @@ import Seat from "./Seat"
 
 type SeatLayoutProps = {
     className?: string;
+    reservedSeats: string[];
 }
 
 
-export default function SeatLayout({ className, ...rest}: SeatLayoutProps) {
+export default function SeatLayout({ className, reservedSeats, ...rest}: SeatLayoutProps) {
     const searchParams = useSearchParams();
 
-    const [selectedCount, setSelectedCount] = useState(0)
-    let price = selectedCount * 5 - 0.01
+    const [selectedSeats, setSelectedSeats] = useState<string[]>([])
+    console.log(selectedSeats)
 
-    const toggleSeat = (selected: boolean) => {
-        setSelectedCount(prev => prev + (selected ? 1 : -1))
+    const toggleSeat = (seatId: string, isSelected: boolean) => {
+        setSelectedSeats(seatArr => {
+            if (isSelected) {
+                if (!seatArr.includes(seatId)) {
+                    return [...seatArr, seatId]
+                }
+                return seatArr
+            } else {
+                return seatArr.filter(id => id !== seatId)
+            }
+        })
     }
 
     return (
-        <>
+        <div className={`${className ? className : ""}`} {...rest}>
             <div className="space-y-12">
-                <div className={`w-full space-y-3 ${className ? className : ""}`} {...rest}>
-                    {Array.from({ length: 5 }).map((_, i) => {
-                        const row = String.fromCharCode(65 + i)
+                <div className="w-full space-y-3">
+                    {Array.from({ length: 5 }).map((_, rowIndex) => {
+                        const row = String.fromCharCode(65 + rowIndex)
                         return (
-                            <div className="grid grid-cols-8 gap-3" id={row} key={i}>
-                                {Array.from({ length: 8 }).map((_, i) => (
-                                    <Seat
-                                        key={i}
-                                        id={`${row}${i + 1}`}
-                                        onToggle={toggleSeat}
-                                    />
-                                ))}
+                            <div className="flex justify-between gap-2" id={row} key={rowIndex}>
+                                {Array.from({ length: 8 }).map((_, seatIndex) => {
+                                    const seatId = `${row}${seatIndex + 1}`
+                                    return (
+                                        <Seat
+                                            key={seatIndex}
+                                            seatId={seatId}
+                                            selected={selectedSeats.includes(seatId)}
+                                            onToggle={(isSelected: boolean) => toggleSeat(seatId, isSelected)}
+                                            className={seatIndex === 4 ? "!ml-5" : ""}
+                                            reserved={reservedSeats.includes(seatId)}
+                                        />
+                                    )
+                                })}
                             </div>
                         )
                     })}
@@ -57,17 +73,17 @@ export default function SeatLayout({ className, ...rest}: SeatLayoutProps) {
 
 
             <Button
-                href={`checkout?${searchParams}&amount=${selectedCount}`}
-                className={`mt-7 ${selectedCount > 0 ? "flex justify-evenly items-center" : "opacity-50 pointer-events-none"}`}
+                href={`checkout?${searchParams}&seats=${selectedSeats.join(",")}`}
+                className={`mt-7 ${selectedSeats.length > 0 ? "flex justify-evenly items-center" : "opacity-50 pointer-events-none"}`}
             >
                 <p className="px-6">Checkout</p>
-                {selectedCount > 0 && (
+                {selectedSeats.length > 0 && (
                     <>
                         <p>|</p>
-                        <p>${price}</p>
+                        <p>${selectedSeats.length * 5 - 0.01}</p>
                     </>
                 )}
             </Button>
-        </>
+        </div>
     )
 }

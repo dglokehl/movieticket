@@ -17,7 +17,7 @@ export default function MovieCard({ children, className, movie, size, ...rest}: 
         <Link href={`/movies/${movie.id}`}>
             <article className={`${className ? className : ""}`} {...rest}>
                 <img
-                    src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "/placeholder.svg"}
+                    src={movie.poster_path || movie.backdrop_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path ? movie.poster_path : movie.backdrop_path}` : "/placeholder.svg"}
                     alt=""
                     className={`${size === "lg" ? "min-w-46 w-full h-62" : "min-w-30 w-full h-46"} object-cover rounded-xl`}
                 />
@@ -27,7 +27,7 @@ export default function MovieCard({ children, className, movie, size, ...rest}: 
                 </h2>
 
                 <h3 className="mt-0.5 text-sm text-grey-light">
-                    {size === "lg" ? <StarRating rating={formatStars(movie.vote_average)} /> : movie.genre_ids[0]}
+                    {size === "lg" ? <StarRating rating={formatStars(movie.vote_average ? movie.vote_average : 0)} /> : movie.genre_ids ? movie.genre_ids[0] : "N/A"}
                 </h3>
             </article>
         </Link>

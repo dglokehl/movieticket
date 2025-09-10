@@ -1,5 +1,5 @@
 import { FaStar } from "react-icons/fa6";
-import { formatRuntime, formatRating } from "@/utils/helpers"
+import { formatRuntime, formatRating, formatDate } from "@/utils/helpers"
 import { getMovies } from "@/app/api/actions"
 
 import Button from "@/components/Button"
@@ -15,14 +15,10 @@ export default async function TicketCard({ className, ticket, index, ...rest}: T
     const movie = await getMovies(`https://api.themoviedb.org/3/movie/${ticket.movie_id}`)
     // console.log(movie)
 
-    const created = new Date(ticket.created_at);
-    const dateFormatted = new Intl.DateTimeFormat("en-DK", { day: "2-digit", month: "long", year: "numeric" }).format(created);
-
-
     return (
         <article className={`space-y-3 ${className ? className : ""}`} {...rest}>
             <h2 className="heading-1">
-                <span className="mr-2">{index}.</span> {dateFormatted}
+                <span className="mr-2">{index}.</span> {formatDate(ticket.created_at)}
             </h2>
 
             <div className="flex items-center justify-between">
@@ -58,12 +54,12 @@ export default async function TicketCard({ className, ticket, index, ...rest}: T
                     Time: <span className="text-grey-medium">{ticket.time}</span>
                 </p>
                 <p>
-                    Amount: <span className="text-grey-medium">{ticket.amount}</span>
+                    Seats: <span className="text-grey-medium">{ticket.seats.join(", ")}</span>
                 </p>
             </div>
 
             <Button href={`/tickets/${ticket.id}`}>
-                See ticket{ticket.amount > 1 && "s"}
+                See ticket{ticket.seats.length > 1 && "s"}
             </Button>
         </article>
     )

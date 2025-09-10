@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 
-export default async function LoginPage() {
+export default async function SignupPage() {
     return (
         <PageWrapper
             className="space-y-12"

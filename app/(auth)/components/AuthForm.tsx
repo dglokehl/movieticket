@@ -14,7 +14,11 @@ type AuthFormProps = {
 
 export default function AuthForm({ children, className, onSubmit, ...rest}: AuthFormProps) {
     return (
-        <Form action={onSubmit === "login" ? login : signup} className={`space-y-5 ${className ? className : ""}`} {...rest}>
+        <Form
+            action={onSubmit === "login" ? login : signup}
+            className={`space-y-5 ${className ? className : ""}`}
+            {...rest}
+        >
             {children}
 
             <Button className="text-xs">

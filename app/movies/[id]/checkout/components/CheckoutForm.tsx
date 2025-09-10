@@ -17,15 +17,17 @@ type CheckoutFormProps = {
 
 export default function CheckoutForm({ className, movie, movie_title, ...rest}: CheckoutFormProps) {
     const searchParams = useSearchParams();
+
+    const seats = searchParams.get("seats")?.split(",")
     const params = {
         movie_id: movie,
         movie_title: movie_title,
         cinema: searchParams.get("cinema"),
         date: searchParams.get("date"),
         time: searchParams.get("time"),
-        amount: searchParams.get("amount")
+        seats: seats,
     }
-    // console.log(params)
+    console.log(params)
 
     const [success, setSuccess] = useState(false);
 
@@ -38,7 +40,9 @@ export default function CheckoutForm({ className, movie, movie_title, ...rest}: 
     return (
         <Form
             action={handleSubmit} 
-            className={`grid grid-cols-2 gap-y-3 gap-x-8 *:col-span-2 ${className ? className : ""}`} {...rest}>
+            className={`grid grid-cols-2 gap-y-3 gap-x-8 *:col-span-2 ${className ? className : ""}`}
+            {...rest}
+        >
             <h2 className="heading-1">
                 Payment Details
             </h2>
@@ -62,7 +66,7 @@ export default function CheckoutForm({ className, movie, movie_title, ...rest}: 
             <Button className="mt-7 flex justify-evenly items-center">
                 <p className="px-6">Pay Now</p>
                 <p>|</p>
-                <p>${Number(params.amount) * 5 - 0.01}</p>
+                <p>${Number(seats?.length) * 5 - 0.01}</p>
             </Button>
 
             {success && (

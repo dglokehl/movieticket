@@ -1,4 +1,4 @@
-import { FaDatabase, FaUserPlus, FaTrash, FaBell, FaTicket, FaArrowRightFromBracket } from "react-icons/fa6";
+import { FaDatabase, FaUserPlus, FaTrash, FaBell, FaBookmark, FaArrowRightFromBracket } from "react-icons/fa6";
 
 
 export type settingsDataProps = {
@@ -39,9 +39,9 @@ export const privacyData = [
     },
     {
         color: "bg-[#54C2E5]",
-        icon: <FaTicket />,
-        text: "Your Ticket",
-        href: "/"
+        icon: <FaBookmark />,
+        text: "Your Favorites",
+        href: "/settings/saved"
     },
     {
         color: "bg-[#E55454]",

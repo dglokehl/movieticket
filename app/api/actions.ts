@@ -61,7 +61,7 @@ export async function supaCreateTicket(obj: any) {
             user_id: user && user.id,
             date: obj.date,
             time: `${obj.time}:00`,
-            amount: obj.amount,
+            seats: obj.seats,
             cinema: obj.cinema,
             movie_id: obj.movie_id,
             movie_title: obj.movie_title,
@@ -71,6 +71,33 @@ export async function supaCreateTicket(obj: any) {
         console.log(error)
         return
     }
+}
+
+
+export async function supaUpdateProfile(formData: FormData) {
+    const supabase = await createClient()
+
+    const { data: { user } } = await supabase.auth.getUser()
+
+    const { data, error } = await supabase
+        .from("profiles")
+        .update({
+            title: formData.get("user_title") as string
+        })
+        .eq("id", user?.id)
+        .select()
+    console.log(data, error)
+}
+
+
+export async function supaUpdateAccount(formData: FormData) {
+    const supabase = await createClient()
+
+    const { data, error } = await supabase.auth.updateUser({
+        email: formData.get("email") as string,
+        data: { first_name: formData.get("name") as string }
+    })
+    console.log(data, error)
 }
 
 

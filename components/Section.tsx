@@ -1,19 +1,45 @@
+import { createClient } from "@/utils/supabase/server"
+import { getMovies } from "@/app/api/actions"
+
+import ComingSoon from "./card/ComingSoon"
+import MovieCard from "./card/MovieCard"
+import CinemaCard from "./card/CinemaCard"
+
 type SectionProps = {
-    children?: React.ReactNode
-    className?: string;
     obj: {
         heading: string;
         button?: string;
         gap?: string;
+        orientation?: string;
+        movie?: {
+            link: string;
+            type: string;
+            size?: string;
+        }
     }
 }
 
 
-export default function Section({ children, className, obj, ...rest}: SectionProps) {
+export default async function Section({ obj, ...rest}: SectionProps) {
+    let arr
+    if (!obj.movie) {
+        const supabase = await createClient()
+        const { data, error } = await supabase
+            .from("cinemas")
+            .select()
+        console.log("cinemas", data)
+
+        arr = data
+    } else {
+        const movies = await getMovies(obj.movie.link)
+        console.log(movies)
+        arr = movies.results
+    }
+
     return (
-        <section className={`${className ? className : ""}`} {...rest}>
-            <div className="flex justify-between">
-                <h2 className="mb-3 heading-1">
+        <section {...rest}>
+            <div className="mb-3 flex justify-between items-end">
+                <h2 className="heading-1">
                     {obj.heading}
                 </h2>
 
@@ -24,8 +50,13 @@ export default function Section({ children, className, obj, ...rest}: SectionPro
                 )}
             </div>
 
-            <div className={`flex ${obj.gap ? obj.gap : "gap-7.5"} overflow-x-scroll`}>
-                {children}
+            <div className={`flex ${obj.gap ? obj.gap : "gap-7.5"} ${!obj.movie ? "flex-col overflow-y-scroll" : "overflow-x-scroll"}`}>
+                {arr.map((movie: any, i: number) => 
+                    !obj.movie ? <CinemaCard cinema={movie} key={i} />
+                        : obj.movie.type === "ComingSoon" ? <ComingSoon movie={movie} key={i} />
+                        : obj.movie.type === "Movie" ? <MovieCard movie={movie} key={i} size={obj.movie.size} />
+                    : ""
+                )}
             </div>
         </section>
     )

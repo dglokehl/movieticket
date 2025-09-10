@@ -3,7 +3,8 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 
-import { LuHouse, LuCompass, LuBookmark, LuUser } from "react-icons/lu";
+import { LuHouse, LuCompass, LuTicket, LuUser } from "react-icons/lu";
+import { FaHouse, FaCompass, FaTicket, FaUser } from "react-icons/fa6";
 
 type FooterProps = {
     className?: string;
@@ -12,19 +13,19 @@ type FooterProps = {
 const footerData = [
     {
         href: "/",
-        icon: <LuHouse />,
+        icon: <FaHouse />,
     },
     {
         href: "/movies",
-        icon: <LuCompass />,
+        icon: <FaCompass />,
     },
     {
         href: "/tickets",
-        icon: <LuBookmark />,
+        icon: <FaTicket />,
     },
     {
         href: "/settings",
-        icon: <LuUser />,
+        icon: <FaUser />,
     },
 ]
 
@@ -34,10 +35,10 @@ export default function Footer({ className, ...rest}: FooterProps) {
     return (
         <footer className={`h-20 flex fixed inset-x-0 bottom-0 bg-bg *:size-full *:*:size-full ${className ? className : ""}`} {...rest}>
             <nav>
-                <menu className="flex justify-around items-center *:*:*:size-6 text-grey-dark">
+                <menu className="flex justify-around items-center text-grey-dark">
                     {footerData.map((link, i) => (
                         <li key={i}>
-                            <Link href={link.href} className={pathname === link.href ? "text-blue-500" : ""}>
+                            <Link href={link.href} className={`*:size-6 ${pathname === link.href ? "text-blue-500" : ""}`}>
                                 {link.icon}
                             </Link>
                         </li>

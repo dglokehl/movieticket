@@ -1,35 +1,31 @@
 "use client"
 
-import { useState } from "react"
-
 type SeatProps = {
+    className?: string;
     reserved?: boolean;
-    id: string;
-    onToggle: (selected: boolean) => void;
+    seatId: string;
+    selected: boolean;
+    onToggle: (isSelected: boolean) => void;
 }
 
-export default function Seat({ reserved, id, onToggle, ...rest}: SeatProps) {
-    const [selected, setSelected] = useState(false);
-
-    const handleClick = (e: any) => {
-        if (!reserved) {
-            setSelected(!selected)
-            onToggle(!selected)
-            // console.log(e.currentTarget)
-        }
+export default function Seat({ className, reserved, seatId, selected, onToggle, ...rest}: SeatProps) {
+    const handleClick = () => {
+        !reserved && onToggle(!selected)
     }
 
     return (
         <div
-            id={id}
-            className={`size-7.5 rounded-[10px] cursor-pointer text-xs text-center text-grey-medium
-                ${reserved ? "bg-[#EB5757]"
-                : selected ? "bg-blue"
-                : "border-[1px] border-grey-dark hover:bg-blue/25"}`}
+            id={seatId}
+            className={`size-7.5 grid place-items-center rounded-[10px] cursor-pointer text-xs text-center whitespace-nowrap
+                ${reserved ? "bg-[#EB5757] text-transparent"
+                : selected ? "bg-blue text-transparent"
+                : "text-grey-medium border-[1px] border-grey-dark hover:bg-blue/25"}
+                ${className ? className : ""}
+                ${seatId === "A1" || seatId === "A8" || seatId === "E1" || seatId === "E8" ? "opacity-0 pointer-events-none" : ""}`}
             onClick={handleClick}
             {...rest}
         >
-            {id}
+            {/* {seatId} */}
         </div>
     )
 }

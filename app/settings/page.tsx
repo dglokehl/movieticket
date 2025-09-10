@@ -26,12 +26,12 @@ export default async function SettingsPage() {
         <PageWrapper
             className="flex flex-col gap-5 divide-y-1 divide-grey-dark *:pb-8"
             footer
-            header={{ title: metadata.title }}
+            header={{ title: metadata.title as string }}
         >
             {user ? (
                 <>
                     <div>
-                        <Link href="/settings/account">
+                        <Link href="settings/account">
                             <SettingsCard
                                 obj={{
                                     img: profile.image_url ? profile.image_url : "/placeholder_profile.svg",

@@ -1,29 +1,27 @@
 import Link from "next/link";
 import { FaChevronLeft } from "react-icons/fa6";
+import BackButton from "./BackButton";
 
 type HeaderProps = {
-    className?: string;
     obj: {
-        title: string;
+        title?: string;
         button?: React.ReactNode;
     }
 }
 
 
-export default function Header({ className, obj, ...rest}: HeaderProps) {
+export default function Header({ obj, ...rest}: HeaderProps) {
     return (
-        <header className={`h-header px-default flex justify-between items-center gap-3 fixed top-0 inset-x-0 bg-bg ${className ? className : ""}`} {...rest}>
-            <Link href="/" className="size-6 *:size-6">
-                <FaChevronLeft />
-            </Link>
+        <header className="h-header px-default flex justify-between items-center gap-3 fixed top-0 inset-x-0 z-99999 bg-bg" {...rest}>
+            <BackButton />
 
             <h1 className="heading-1 text-center line-clamp-1">
-                {obj.title}
+                {obj.title ? obj.title : ""}
             </h1>
 
-            <button className="size-6 *:size-5 cursor-pointer">
+            <div className="size-6 *:first:size-5 cursor-pointer">
                 {obj.button && obj.button}
-            </button>
+            </div>
         </header>
     )
 }
