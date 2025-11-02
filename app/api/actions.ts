@@ -4,6 +4,36 @@ import { createClient } from "@/utils/supabase/server"
 
 
 // SUPABASE
+export async function supaSelect(from: string) {
+    const supabase = await createClient()
+
+    const { data, error } = await supabase
+        .from(from)
+        .select()
+
+    if (!data && error) {
+        return
+    }
+
+    return data
+}
+
+export async function supaSelectEq(from: string, select: string, eq1: string, eq2: string) {
+    const supabase = await createClient()
+
+    const { data, error } = await supabase
+        .from(from)
+        .select(select)
+        .eq(eq1, eq2)
+
+    if (!data && error) {
+        return
+    }
+
+    return data
+}
+
+
 export async function supaUser() {
     const supabase = await createClient()
 
@@ -68,7 +98,7 @@ export async function supaCreateTicket(obj: any) {
         })
 
     if (error) {
-        console.log(error)
+        // console.log(error)
         return
     }
 }
@@ -86,7 +116,7 @@ export async function supaUpdateProfile(formData: FormData) {
         })
         .eq("id", user?.id)
         .select()
-    console.log(data, error)
+    // console.log(data, error)
 }
 
 
@@ -97,7 +127,7 @@ export async function supaUpdateAccount(formData: FormData) {
         email: formData.get("email") as string,
         data: { first_name: formData.get("name") as string }
     })
-    console.log(data, error)
+    // console.log(data, error)
 }
 
 

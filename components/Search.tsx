@@ -5,12 +5,11 @@ import Form from "next/form"
 import { LuSearch, LuArrowRightToLine } from "react-icons/lu";
 
 type SearchProps = {
-    children?: React.ReactNode
     className?: string;
 }
 
 
-export default function Search({ children, className, ...rest}: SearchProps) {
+export default function Search({ className, ...rest}: SearchProps) {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         const searchQ = e.currentTarget.search.value.toLowerCase().trim()
         console.log("handleSubmit", searchQ)

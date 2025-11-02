@@ -15,7 +15,7 @@ export const metadata = {
 }
 
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
             <body className={`min-h-dvh ${inter.className}`}>
